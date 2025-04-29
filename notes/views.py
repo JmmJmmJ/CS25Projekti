@@ -1,5 +1,5 @@
 from django.http import HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Note
 
@@ -22,3 +22,9 @@ def details(request, id1):
 #        return render(request, 'details.html', {'note' : note})
 #    else:
 #        return HttpResponseNotFound("<h1>Page not found</h1>")
+
+@login_required
+def addView(request):
+	if (request.method == 'POST'):
+		Note.objects.create(owner=request.user, note=request.POST.get('note'), description=request.POST.get('description'))
+	return redirect('/')
