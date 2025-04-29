@@ -11,9 +11,9 @@ def index(request):
 def details(request, id1):
     #note = Note.objects.get(id=id1)
     query = 'SELECT * FROM notes_note WHERE id = %s' % id1
-    note = Note.objects.raw(query)[0]
+    notes = Note.objects.raw(query)
 
-    return render(request, 'details.html', {'note' : note})
+    return render(request, 'details.html', {'notes' : notes})
 
 #@login_required
 #def details(request, id1):

@@ -4,11 +4,22 @@
         <title>Notes site</title>
     </head>
 
+    <!--
     <body>
 		<h1>Note</h1>
         <ul>
 		<li>Note: {{note.note}} Description: {{note.description}}</li>
         </ul>
+    </body>
+     //-->
+    
+    <body>
+		<h1>Note</h1>
+        <ul>
+        {% for note in notes %}
+		<li>Note: {{note.note}} Description: {{note.description}}</li>
+		{% endfor %}
+    </ul>    
     </body>
 
 
