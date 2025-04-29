@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Note
@@ -11,3 +12,11 @@ def index(request):
 def details(request, id1):
     note = Note.objects.get(id=id1)
     return render(request, 'details.html', {'note' : note})
+
+#@login_required
+#def details(request, id1):
+#    note = Note.objects.get(id=id1)
+#    if (note.owner == request.user):
+#        return render(request, 'details.html', {'note' : note})
+#    else:
+#        return HttpResponseNotFound("<h1>Page not found</h1>")
