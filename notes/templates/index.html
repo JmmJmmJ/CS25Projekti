@@ -10,19 +10,10 @@
 			{% csrf_token %}
             <input type="submit" value="Logout"/>
         </form>
-        <h2>Add note</h2>
-        <form action='add/' method="POST">
-            {% csrf_token %}
 
-			Note <input type="text" name="note"/><br/>
-            Description <input type="text" name="description"/><br/>
-            <input type="submit" value="Save"/>
-        </form>
-        <ul>
-		{% for note in notes %}
-		<li>{{note.note}} <a href='/details/{{note.id}}'>View</a></li>
-		{% endfor %}
-        </ul>
+        <a href="/notes/{{user.id}}">Notes</a>
+        <!--<a href="/notes/">Notes</a>-->
+
     </body>
 
 

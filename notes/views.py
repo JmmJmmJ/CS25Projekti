@@ -5,15 +5,17 @@ from .models import Note
 
 @login_required
 def index(request):
-    notes = Note.objects.filter(owner=request.user)
-    return render(request, 'index.html', {'notes' : notes})
+    #return render(request, 'index.html')
+    return render(request, 'index.html', {'user' : request.user})
 
-def details(request, id1):
-    #note = Note.objects.get(id=id1)
-    query = 'SELECT * FROM notes_note WHERE id = %s' % id1
+#@login_required
+def notes(request, id):
+#def notes(request):
+    #notes = Note.objects.filter(owner=request.user)
+    query = 'SELECT * FROM notes_note WHERE owner_id = %s' % id
     notes = Note.objects.raw(query)
 
-    return render(request, 'details.html', {'notes' : notes})
+    return render(request, 'notes.html', {'notes' : notes})
 
 #@login_required
 #def details(request, id1):
@@ -24,7 +26,7 @@ def details(request, id1):
 #        return HttpResponseNotFound("<h1>Page not found</h1>")
 
 @login_required
-def addView(request):
+def addView(request, id):
 	if (request.method == 'POST'):
 		Note.objects.create(owner=request.user, note=request.POST.get('note'), description=request.POST.get('description'))
-	return redirect('/')
+	return redirect('/notes/' + id)
