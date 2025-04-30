@@ -17,16 +17,10 @@ def notes(request, id):
 
     return render(request, 'notes.html', {'notes' : notes})
 
-#@login_required
-#def details(request, id1):
-#    note = Note.objects.get(id=id1)
-#    if (note.owner == request.user):
-#        return render(request, 'details.html', {'note' : note})
-#    else:
-#        return HttpResponseNotFound("<h1>Page not found</h1>")
-
 @login_required
 def addView(request, id):
+#def addView(request):
 	if (request.method == 'POST'):
 		Note.objects.create(owner=request.user, note=request.POST.get('note'), description=request.POST.get('description'))
 	return redirect('/notes/' + id)
+	#return redirect('/notes/')
