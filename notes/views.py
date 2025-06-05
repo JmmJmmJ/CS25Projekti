@@ -1,6 +1,7 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from .models import Note
 
 @login_required
@@ -24,3 +25,13 @@ def addView(request, id):
 		Note.objects.create(owner=request.user, note=request.POST.get('note'), description=request.POST.get('description'))
 	return redirect('/notes/' + id)
 	#return redirect('/notes/')
+      
+def register_view(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    else:
+         form = UserCreationForm()
+    return render(request, 'register.html', {"form": form})

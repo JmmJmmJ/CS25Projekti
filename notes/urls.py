@@ -8,4 +8,5 @@ urlpatterns = [
     #path('notes/add/', views.addView, name='add'),
     path("notes/<str:id>/", views.notes, name="notes"),
     #path("notes/", views.notes, name="notes"),
+    path('register/', views.register_view, name="register"),
 ]
